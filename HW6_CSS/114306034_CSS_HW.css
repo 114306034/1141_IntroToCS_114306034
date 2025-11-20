@@ -1,0 +1,190 @@
+
+body {
+    background-color: #eeede1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.main-container {
+    width: 1000px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    display: flex;
+    overflow: hidden;
+}
+
+.left-panel {
+    width: 30%;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.photo-panel img {
+    width: 100%;
+}
+
+.about-header {
+    margin-bottom: 10px; 
+    padding: 20px;
+}
+
+.about-header .name {
+    font-weight: bold;     
+    font-size: 28px;       
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.about-header .student-info {
+    font-weight: normal;   
+    font-size: 22px;       
+    color: #333;
+}
+
+.text-content {
+    padding: 20px;
+}
+
+.text-content h2 {
+    margin-top: 0;
+    border-bottom: 2px solid #ccc; 
+}
+
+.text-content p {
+    text-align: justify;
+}
+
+.text-content ul {
+    padding-left: 0;
+    list-style: none;
+    display: flex;        
+    flex-direction: column; 
+    gap: 8px;             
+}
+
+.text-content ul li {
+    white-space: nowrap; 
+}
+
+.text-content a {
+    color: #706343;
+    text-decoration: none;
+}
+
+.text-content a:hover {
+    color: #003399;
+}
+
+.nccu-logo {
+    width: 160px;
+    margin-top: 40px;
+}
+
+.right-panel {
+    width: 70%;
+    padding: 20px 30px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 22px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.timeline-item {
+    display: flex;               
+    align-items: center;         
+    margin-bottom: 12px;         
+}
+
+.timeline-item .year {
+    font-weight: bold;
+    width: 120px;               
+}
+
+.timeline-item .description {
+    color: #555;
+    margin-left: 10px;          
+    white-space: nowrap;        
+    overflow: hidden;            
+    text-overflow: ellipsis;     
+}
+
+.tag {
+    display: inline-block;
+    background-color: #dbcaa2;
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.hw-lab-container {
+    display: flex;
+    gap: 20px;
+}
+
+.hw-column, .lab-column {
+    flex: 1;
+    background-color: #fafafa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.hw-column li,
+.lab-column li {
+    margin-bottom: 12px;
+}
+
+.hw-column a,
+.lab-column a {
+    text-decoration: none;
+    color: #baa36e; 
+    font-weight: 500;
+}
+
+.hw-column a:hover,
+.lab-column a:hover {
+    color: #1c2b63; 
+}
+
+.music-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.music-item {
+    width: 23%;
+    text-align: center;
+    color: black;
+}
+
+.music-item img {
+    width: 45px;   
+    height: 30px;  
+    border-radius: 8px;
+    object-fit: cover; 
+}
+
+.music-item p {
+    margin-top: 8px;
+}
+
+.music-note {
+    margin-top: 15px;
+    color: #666;
+}
