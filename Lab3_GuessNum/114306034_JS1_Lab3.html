@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>114306034_Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        h1 {
+            color: #e69e47;
+        }
+        #result img {
+            width: 500px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>114306034_Number Guessing Game</h1>
+    <div id="result"></div>
+
+    <script>
+        var answer = Math.floor(Math.random() * 100) + 1;
+        var chances = 7;
+        var low = 1;
+        var high = 100;
+
+        while (chances > 0) {
+            var input = window.prompt(
+               "請輸入 " + low + " 到 " + high + " 之間的整數。\n" +
+               "你還有 " + chances + " 次機會。"
+            );
+
+            if (input === null) {
+                alert("遊戲結束！");
+                break;
+            }
+
+            input = input.trim();
+
+            if (input === "" || isNaN(input)) {
+                alert("請輸入有效的數字！");
+                continue;
+            }
+
+            var guess = Number(input);
+
+            if (guess < low || guess > high) {
+                alert("請輸入有效範圍內的數字( 不能超出 " + low + " 到 " + high + " ) !");
+                continue;
+            }
+
+            if (guess === answer) {
+                alert("恭喜你答對了！正確答案是 " + answer);
+                document.getElementById("result").innerHTML =
+                    '<img src="images/correct.jpg">';
+                break; 
+            }
+
+            if (guess < answer) {
+                low = guess + 1;
+                alert("太小了！");
+            } else {
+                high = guess - 1;
+                alert("太大了！");
+            }
+
+            chances--;
+        }
+
+        if (chances === 0) {
+            alert("遊戲結束！正確答案是 " + answer);
+            document.getElementById("result").innerHTML =
+                '<img src="images/wrong.jpg">';
+        }
+    </script>
+</body>
+</html>
