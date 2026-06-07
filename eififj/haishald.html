@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多語系地點語音介紹 - 角板山林業故事館</title>
+    <style>
+        /* 基本網頁排版與美化 (已調整為森林系綠色調) */
+        body {
+            font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f0f4ef 0%, #d4e0ce 100%);
+            color: #3a4a35;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(70, 107, 75, 0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 85%;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* 語言選擇器樣式 */
+        .lang-container {
+            margin-bottom: 25px;
+        }
+
+        select {
+            padding: 10px 16px;
+            font-size: 15px;
+            border-radius: 50px;
+            border: 1px solid #b9d4bc;
+            outline: none;
+            cursor: pointer;
+            background-color: #f7fdf8;
+            color: #405c44;
+            transition: all 0.3s ease;
+            appearance: none;
+            text-align: center;
+            width: 140px;
+            font-family: inherit;
+        }
+
+        select:hover, select:focus {
+            border-color: #73a67a;
+            box-shadow: 0 0 8px rgba(115, 166, 122, 0.2);
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #405c44;
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #6d8c70;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* 播放按鈕樣式 */
+        #play-btn {
+            background-color: #658b68;
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            gap: 12px;
+            width: 100%;
+            max-width: 220px;
+            box-shadow: 0 8px 20px rgba(115, 166, 122, 0.3);
+        }
+
+        #play-btn:hover {
+            background-color: #507253;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(92, 140, 97, 0.4);
+        }
+
+        #play-btn:active {
+            transform: translateY(1px);
+        }
+
+        #play-btn:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="lang-container">
+            <select id="lang-select">
+                <option value="zh">繁體中文</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+                <option value="ko">한국어</option>
+            </select>
+        </div>
+
+        <h1 id="title">角板山林業故事館</h1>
+        <p id="desc">點擊下方按鈕，聆聽本館的專屬語音導覽介紹。</p>
+        
+        <button id="play-btn">
+            <span id="icon">🔊</span> 
+            <span id="btn-text">播放介紹</span>
+        </button>
+
+        <audio id="audio-player" src="ttsmaker-file-2026-6-1-15-6-0.mp3"></audio>
+    </div>
+
+    <script>
+        // --- 1. 多國語言翻譯與音檔設定 ---
+        const languageData = {
+            zh: {
+                title: "角板山林業故事館",
+                desc: "點擊下方按鈕，聆聽本館的專屬語音導覽介紹。",
+                playText: "播放介紹",
+                pauseText: "暫停介紹",
+                audioSrc: "ttsmaker-file-2026-6-1-15-6-0.mp3" // 請替換為中文音檔檔名
+            },
+            en: {
+                title: "Jiaobanshan Forestry Story House",
+                desc: "Click the button below to listen to the exclusive audio guide for our story house.",
+                playText: "Play Guide",
+                pauseText: "Pause Guide",
+                audioSrc: "ttsmaker-file-2026-6-1-15-7-23.mp3" // 請替換為英文音檔檔名
+            },
+            ja: {
+                title: "角板山林業故事館",
+                desc: "下のボタンをクリックして、当館の専用音声ガイドをお聞きください。",
+                playText: "再生する",
+                pauseText: "一時停止",
+                audioSrc: "ttsmaker-file-2026-6-1-15-8-22.mp3" // 請替換為日文音檔檔名
+            },
+            ko: {
+                title: "자오반산 임업 스토리 하우스",
+                desc: "아래 버튼을 클릭하여 본관의 전용 오디오 가이드를 들어보세요.",
+                playText: "재생하기",
+                pauseText: "일시정지",
+                audioSrc: "ttsmaker-file-2026-6-1-15-9-23.mp3" // 請替換為韓文音檔檔名
+            }
+        };
+
+        // --- 2. 取得網頁元素 ---
+        const langSelect = document.getElementById('lang-select');
+        const titleEl = document.getElementById('title');
+        const descEl = document.getElementById('desc');
+        const playBtn = document.getElementById('play-btn');
+        const audioPlayer = document.getElementById('audio-player');
+        const icon = document.getElementById('icon');
+        const btnText = document.getElementById('btn-text');
+
+        let isPlaying = false;
+        let currentLang = 'zh'; // 預設語言
+
+        // --- 3. 切換語言的功能 ---
+        langSelect.addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            const data = languageData[currentLang];
+
+            // 停止正在播放的音樂
+            if (isPlaying) {
+                audioPlayer.pause();
+                isPlaying = false;
+            }
+
+            // 更新網頁上的文字
+            titleEl.textContent = data.title;
+            descEl.textContent = data.desc;
+            
+            // 更新按鈕狀態與文字
+            icon.textContent = '🔊';
+            btnText.textContent = data.playText;
+
+            // 替換成對應語言的音檔
+            audioPlayer.src = data.audioSrc;
+        });
+
+        // --- 4. 點擊按鈕時的播放/暫停動作 ---
+        playBtn.addEventListener('click', () => {
+            const data = languageData[currentLang];
+
+            if (isPlaying) {
+                audioPlayer.pause();
+                icon.textContent = '🔊';
+                btnText.textContent = data.playText; // 顯示對應語言的「播放」
+            } else {
+                audioPlayer.play();
+                icon.textContent = '⏸';
+                btnText.textContent = data.pauseText; // 顯示對應語言的「暫停」
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // --- 5. 當音檔播放完畢時，自動將按鈕重置 ---
+        audioPlayer.addEventListener('ended', () => {
+            const data = languageData[currentLang];
+            isPlaying = false;
+            icon.textContent = '🔊';
+            btnText.textContent = data.playText;
+        });
+    </script>
+
+</body>
+</html>
